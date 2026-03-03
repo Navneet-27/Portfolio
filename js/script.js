@@ -99,7 +99,15 @@ window.addEventListener('resize', () => {
 
 window.addEventListener('scroll', () => {
     const header = document.querySelector('.header');
+    const menuToggle = document.getElementById('menuToggle');
+    const nav = document.querySelector('.nav');
     const currentScrollPos = window.scrollY;
+    
+    // Close mobile menu when scrolling
+    if (isMobileView && currentScrollPos > lastScrollPos) {
+        menuToggle.classList.remove('active');
+        nav.classList.remove('active');
+    }
     
     if (isMobileView) {
         // Scrolling down - hide header
