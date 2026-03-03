@@ -1,3 +1,30 @@
+// Home button - scroll to top
+const homeBtn = document.getElementById('homeBtn');
+homeBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
+
+// 3-Dot Menu Toggle
+const menuToggle = document.getElementById('menuToggle');
+const nav = document.querySelector('.nav');
+
+menuToggle.addEventListener('click', () => {
+    menuToggle.classList.toggle('active');
+    nav.classList.toggle('active');
+});
+
+// Close menu when a nav link is clicked
+document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+        menuToggle.classList.remove('active');
+        nav.classList.remove('active');
+    });
+});
+
 // Smooth scroll offset for sticky header
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -6,7 +33,9 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             e.preventDefault();
             const target = document.querySelector(href);
             if (target) {
-                const offsetTop = target.offsetTop - 100;
+                const header = document.querySelector('.header');
+                const headerHeight = header ? header.offsetHeight : 140;
+                const offsetTop = target.offsetTop - headerHeight - 5;
                 window.scrollTo({
                     top: offsetTop,
                     behavior: 'smooth'
