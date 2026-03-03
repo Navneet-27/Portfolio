@@ -88,3 +88,32 @@ document.querySelectorAll('.skill-category, .project-card, .experience-card, .co
     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     observer.observe(el);
 });
+
+// Hide/Show header on scroll for mobile
+let lastScrollPos = 0;
+let isMobileView = window.innerWidth <= 768;
+
+window.addEventListener('resize', () => {
+    isMobileView = window.innerWidth <= 768;
+});
+
+window.addEventListener('scroll', () => {
+    const header = document.querySelector('.header');
+    const currentScrollPos = window.scrollY;
+    
+    if (isMobileView) {
+        // Scrolling down - hide header
+        if (currentScrollPos > lastScrollPos && currentScrollPos > 100) {
+            header.classList.add('hidden');
+        }
+        // Scrolling up - show header
+        else if (currentScrollPos < lastScrollPos) {
+            header.classList.remove('hidden');
+        }
+    } else {
+        // Always show header on desktop
+        header.classList.remove('hidden');
+    }
+    
+    lastScrollPos = currentScrollPos <= 0 ? 0 : currentScrollPos;
+});
