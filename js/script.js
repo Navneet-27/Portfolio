@@ -34,8 +34,18 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             const target = document.querySelector(href);
             if (target) {
                 const header = document.querySelector('.header');
+                
+                // Show header on mobile if it's hidden
+                if (header.classList.contains('hidden')) {
+                    header.classList.remove('hidden');
+                    lastScrollPos = 0;
+                }
+                
+                // Calculate proper offset
                 const headerHeight = header ? header.offsetHeight : 140;
                 const offsetTop = target.offsetTop - headerHeight - 5;
+                
+                // Scroll to section
                 window.scrollTo({
                     top: offsetTop,
                     behavior: 'smooth'
